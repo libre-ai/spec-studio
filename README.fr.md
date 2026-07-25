@@ -74,4 +74,12 @@ Pour suivre l'avancement ou contribuer, ouvrez issues et pull requests dans [`li
 
 ## Licence
 
-EUPL-1.2.
+Multi-licence, déclarée par chemin dans [`REUSE.toml`](REUSE.toml) et résumée dans [`LICENSE`](LICENSE) :
+
+- **EUPL-1.2** — l'espace de travail Rust et l'automatisation propre au dépôt ;
+- **Apache-2.0** — les contrats d'interopérabilité JSON Schema sous [`specs/`](specs), publiés pour que d'autres implémentations puissent les consommer et les réimplémenter ;
+- **CC-BY-4.0** — la documentation éditoriale, les fichiers de gouvernance et les registres de projet.
+
+Les textes complets sont dans [`LICENSES/`](LICENSES). La politique à l'échelle de l'organisation fait foi et n'est pas redite ici : [`libre-ai/libre-ai/LICENSING.md`](https://github.com/libre-ai/libre-ai/blob/main/LICENSING.md). `reuse lint` verrouille chaque changement.
+
+Les révisions historiques publiées antérieurement sous MIT restent disponibles sous ces termes. Aucun octroi de licence antérieur n'est retiré.
