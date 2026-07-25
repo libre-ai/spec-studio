@@ -19,13 +19,24 @@ precedence = "closest"
 SPDX-FileCopyrightText = "2026 Libre AI contributors"
 SPDX-License-Identifier = "EUPL-1.2"
 
-# Editorial documentation, governance files and first-party project records,
-# including the issue templates carried under `.github/`.
+# Editorial documentation, governance files and first-party project records.
 [[annotations]]
 path = ["*.md", "**/*.md"]
 precedence = "closest"
 SPDX-FileCopyrightText = "2026 Libre AI contributors"
 SPDX-License-Identifier = "CC-BY-4.0"
+
+# Restores `.github/**` after the Markdown block, since the last matching
+# annotation wins. Without this, the four issue templates fell to CC-BY-4.0
+# while the same files are EUPL-1.2 in feed-radar, notebook and sessions — the
+# canonical table maps `.github/**` to the first-party default with no carve-out
+# for prose. Treating the templates as documentation was defensible, but a rule
+# applied in one repository out of four is a divergence, not a rule.
+[[annotations]]
+path = [".github/**"]
+precedence = "closest"
+SPDX-FileCopyrightText = "2026 Libre AI contributors"
+SPDX-License-Identifier = "EUPL-1.2"
 
 # Interoperability contracts. The SpecPackage delivery schema and the shared
 # workspace-identity fact set describe a data shape for other implementations
