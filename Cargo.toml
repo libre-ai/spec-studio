@@ -6,6 +6,7 @@ resolver = "2"
 edition = "2021"
 license = "MIT"
 version = "0.1.0"
+repository = "https://github.com/libre-ai/spec-studio"
 
 [workspace.dependencies]
 anyhow = "1"
