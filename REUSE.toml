@@ -1,0 +1,38 @@
+version = 1
+
+# Annotations follow the canonical policy in libre-ai/libre-ai/LICENSING.md.
+# Within this file the last matching annotation wins, so the broad first-party
+# default comes first and the narrower boundaries are declared after it.
+
+# First-party software by default: the Rust workspace and the repository's own
+# automation and brand asset.
+[[annotations]]
+path = [
+  ".github/**",
+  ".gitignore",
+  "Cargo.lock",
+  "Cargo.toml",
+  "crates/**",
+  "deny.toml",
+]
+precedence = "closest"
+SPDX-FileCopyrightText = "2026 Libre AI contributors"
+SPDX-License-Identifier = "EUPL-1.2"
+
+# Editorial documentation, governance files and first-party project records,
+# including the issue templates carried under `.github/`.
+[[annotations]]
+path = ["*.md", "**/*.md"]
+precedence = "closest"
+SPDX-FileCopyrightText = "2026 Libre AI contributors"
+SPDX-License-Identifier = "CC-BY-4.0"
+
+# Interoperability contracts. The SpecPackage delivery schema and the shared
+# workspace-identity fact set describe a data shape for other implementations
+# to consume and reimplement; they carry no runtime decision logic, so they
+# take the permissive contract boundary rather than the reciprocal one.
+[[annotations]]
+path = ["specs/**"]
+precedence = "closest"
+SPDX-FileCopyrightText = "2026 Libre AI contributors"
+SPDX-License-Identifier = "Apache-2.0"

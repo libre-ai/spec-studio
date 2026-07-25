@@ -74,4 +74,12 @@ To follow progress or contribute, open issues and pull requests in [`libre-ai/li
 
 ## License
 
-EUPL-1.2.
+Multi-licence, declared per path in [`REUSE.toml`](REUSE.toml) and summarised in [`LICENSE`](LICENSE):
+
+- **EUPL-1.2** — the Rust workspace and the repository's own automation;
+- **Apache-2.0** — the JSON Schema interoperability contracts under [`specs/`](specs), published so other implementations can consume and reimplement them;
+- **CC-BY-4.0** — editorial documentation, governance files and project records.
+
+Full licence texts are in [`LICENSES/`](LICENSES). The organization-wide policy is canonical and is not restated here: [`libre-ai/libre-ai/LICENSING.md`](https://github.com/libre-ai/libre-ai/blob/main/LICENSING.md). `reuse lint` gates every change.
+
+Historical revisions previously published under MIT remain available under those terms. No previous licence grant is withdrawn.
