@@ -1,0 +1,97 @@
+# Fiche d'état du projet — autorité de l'état depuis ADR-0020 (design §6.2).
+# La section statut du README est générée depuis cette fiche (sentinelles),
+# jamais éditée à la main ; l'avancement est calculé, jamais déclaré.
+schema_version: libre-ai.project.v1
+project: specifications
+repository: libre-ai/spec-studio
+kind: product
+layer: couche-1
+statement:
+  for: "les équipes produit"
+  who_faces: "des décisions dispersées dans les conversations et perdues à la passation"
+  enables: "transformer les conversations en décisions, spécifications et passations traçables"
+  producing:
+    - "des paquets de spécification versionnés dont chaque acceptation est enregistrée"
+  without_depending_on:
+    - "aucune vérité produit hors du dépôt"
+summary: "Atelier produit contract-first : des conversations vers décisions, specs et passations traçables (couche 1)."
+current_situation: >-
+  L'application Spec Studio (couche de commande fail-closed, persistance sur la brique data) est greffée et verte ; la passation outillée de bout en bout reste à construire.
+scope:
+  - "décisions et spécifications versionnées"
+  - "acceptations enregistrées et rejouables"
+  - "passations exportables"
+non_goals:
+  - "vérité produit hors dépôt"
+  - "édition anonyme"
+dependencies:
+  - on: libre-ai/data
+    why: "persistance et transactions multi-tenant"
+    pinned: "git-dep épinglée par SHA dans le manifest de ce repo"
+  - on: libre-ai/web-platform
+    why: "socle applicatif Bun.serve + React"
+    pinned: "git-dep épinglée par SHA dans le manifest de ce repo"
+  - on: libre-ai/testing
+    why: "Postgres éphémère des tests d'intégration"
+    pinned: "git-dep épinglée par SHA dans le manifest de ce repo"
+  - on: libre-ai/contracts
+    why: "autorité des contrats"
+    pinned: "git-dep épinglée par SHA dans le manifest de ce repo"
+  - on: libre-ai/governance
+    why: "gabarit de flotte et gates de qualité"
+    pinned: "git-dep épinglée par SHA dans le manifest de ce repo"
+maturity: usable
+confidence: medium
+exposure: spec-published
+freshness:
+  last_verified_on: "2026-07-30"
+hypothesis: >
+  Immutable accepted spec packages with planning-only handoffs make a
+  spec workspace more trustworthy than Notion/Linear-class tools without
+  reproducing their workflow automation.
+evidence_required:
+  - parity audit against the 75-feature Notion+Linear map (docs/parity/audits/PARITY-specstudio-notion.md)
+  - the 8 T1 amendments shipped (nesting, backlinks, templates, diff UI, timeline, parallel review, keyboard-only)
+  - author/approver separation demonstrated end-to-end (RLS, SupersedeSpecPackage)
+promotion_criteria:
+  - to: usable-verifiable
+    when: covered traits >= 50 of 75 (baseline 20) and the 8 ABSENT-T1 closed
+  - to: proven
+    when: covered traits >= 60 of 75 across two consecutive parity audits
+kill_predicates:
+  - id: parity-stagnation
+    predicate: covered_traits < 35 of 75
+    window: two consecutive parity audits after wave-4 activation
+    source: docs/parity/audits/PARITY-specstudio-notion.md
+  - id: planning-only-breach
+    predicate: an execution-capable token is issuable from the planning surface
+    source: docs/parity/audits/PARITY-specstudio-notion.md
+benchmark:
+  product: Notion
+  url: https://www.notion.so
+scope_stability: stable
+phases:
+  - id: activation
+    title: Activation multi-repo (γ 3.5)
+    exit_criteria:
+      - id: graft-green
+        text: Contenu greffé depuis le hub avec son histoire, workspace autonome vert en CI réelle, description dégelée.
+        weight: 2
+        status: accepted
+        evidence:
+          date: "2026-07-30"
+          reference: "gate-acceptance-log 2026-07-30 (ligne 3.5), PR hub #286"
+  - id: handoff
+    title: Passation outillée
+    exit_criteria:
+      - id: handoff-done
+        text: Une conversation devient décision, spécification et passation exportable, parcours e2e verts.
+        weight: 4
+        status: pending
+  - id: exposure
+    title: Exposition vérifiable
+    exit_criteria:
+      - id: promotion-met
+        text: Les conditions de promotion vers usable-verifiable déclarées par cette fiche (promotion_criteria) sont réunies et vérifiées.
+        weight: 4
+        status: pending
