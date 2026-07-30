@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, test } from "bun:test";
+import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { join } from "node:path";
 import { withTenantDbTransaction } from "@libre-ai/data";
 import { createTestDatabase, type TestDatabase } from "@libre-ai/testing";
@@ -17,9 +17,8 @@ const DATA_MIGRATIONS = join(
   import.meta.dir,
   "..",
   "..",
-  "..",
-  "..",
-  "packages",
+  "node_modules",
+  "@libre-ai",
   "data",
   "migrations",
 );
@@ -64,6 +63,12 @@ async function asRawTenant<T>(tenant: string | null, fn: () => Promise<T>): Prom
     await tdb.db.exec("ROLLBACK");
   }
 }
+
+// Standalone workspaces surface what the hub run masked: an unclosed
+// PGlite instance makes bun test exit non-zero even with every test green.
+afterAll(async () => {
+  await tdb.close();
+});
 
 describe("spec-workspace store round-trip and tenant isolation", () => {
   test("saves a draft workspace and loads it back within the tenant", async () => {

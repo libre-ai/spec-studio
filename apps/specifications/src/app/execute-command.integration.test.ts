@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, test } from "bun:test";
+import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { join } from "node:path";
 import { createTestDatabase, type TestDatabase } from "@libre-ai/testing";
 import type { Command } from "../domain/workspace";
@@ -12,9 +12,8 @@ const DATA_MIGRATIONS = join(
   import.meta.dir,
   "..",
   "..",
-  "..",
-  "..",
-  "packages",
+  "node_modules",
+  "@libre-ai",
   "data",
   "migrations",
 );
@@ -35,6 +34,12 @@ beforeAll(async () => {
 function run(workspaceId: string, command: Command) {
   return executeSpecCommand(tdb.db, TENANT_A, workspaceId, command, NOW);
 }
+
+// Standalone workspaces surface what the hub run masked: an unclosed
+// PGlite instance makes bun test exit non-zero even with every test green.
+afterAll(async () => {
+  await tdb.close();
+});
 
 describe("spec command service — full authoring journey", () => {
   test("create → requirement → contract → acceptance → submit → two reviews", async () => {

@@ -1,4 +1,4 @@
-import { beforeAll, describe, expect, test } from "bun:test";
+import { afterAll, beforeAll, describe, expect, test } from "bun:test";
 import { join } from "node:path";
 import { withTenantDbTransaction } from "@libre-ai/data";
 import { createTestDatabase, type TestDatabase } from "@libre-ai/testing";
@@ -12,9 +12,8 @@ const DATA_MIGRATIONS = join(
   import.meta.dir,
   "..",
   "..",
-  "..",
-  "..",
-  "packages",
+  "node_modules",
+  "@libre-ai",
   "data",
   "migrations",
 );
@@ -95,6 +94,12 @@ function validPackage(overrides = {}) {
     ...overrides,
   };
 }
+
+// Standalone workspaces surface what the hub run masked: an unclosed
+// PGlite instance makes bun test exit non-zero even with every test green.
+afterAll(async () => {
+  await tdb.close();
+});
 
 describe("persist-acceptance — composition of decideAcceptance + persistence", () => {
   test("persists an accepted workspace and stores the content-addressed package", async () => {
