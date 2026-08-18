@@ -9,7 +9,7 @@ Pour les équipes produit, qui rencontre des décisions dispersées dans les con
 <!-- libre-ai:project-status:begin -->
 <!-- Section générée depuis project.v1.yaml — ne pas éditer à la main. -->
 
-- Situation actuelle : L'application Spec Studio (couche de commande fail-closed, persistance sur la brique data) est greffée et verte ; la passation outillée de bout en bout reste à construire.
+- Situation actuelle : Dormant by owner decision 2026-08-18: no named user (internal or external), zero dogfooding (this repository's own spec is a hand-written Markdown, not a SpecPackage), and the product's real differentiator (the planning-only Biscuit handoff) has no consumer until Missions can execute. Wakes on either named condition: (a) an external pilot product team identified, or (b) Missions/Polaris mature enough to consume CreatePlanningHandoff.
 - Maturité : usable
 - Exposition : spec-published
 - Confiance : medium

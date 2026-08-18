@@ -16,7 +16,12 @@ statement:
     - "aucune vérité produit hors du dépôt"
 summary: "Atelier produit contract-first : des conversations vers décisions, specs et passations traçables (couche 1)."
 current_situation: >-
-  L'application Spec Studio (couche de commande fail-closed, persistance sur la brique data) est greffée et verte ; la passation outillée de bout en bout reste à construire.
+  Dormant by owner decision 2026-08-18: no named user (internal or external),
+  zero dogfooding (this repository's own spec is a hand-written Markdown, not
+  a SpecPackage), and the product's real differentiator (the planning-only
+  Biscuit handoff) has no consumer until Missions can execute. Wakes on
+  either named condition: (a) an external pilot product team identified, or
+  (b) Missions/Polaris mature enough to consume CreatePlanningHandoff.
 scope:
   - "décisions et spécifications versionnées"
   - "acceptations enregistrées et rejouables"
@@ -61,7 +66,11 @@ promotion_criteria:
 kill_predicates:
   - id: parity-stagnation
     predicate: covered_traits < 35 of 75
-    window: two consecutive parity audits after wave-4 activation
+    window: >-
+      two consecutive parity audits after the first dogfooding milestone —
+      evaluated only once dogfooding starts, which dormancy does not have;
+      the countdown is explicitly suspended as of the 2026-08-18 dormancy
+      decision and is not triggered by this card update
     source: docs/parity/audits/PARITY-specstudio-notion.md
   - id: planning-only-breach
     predicate: an execution-capable token is issuable from the planning surface
@@ -83,6 +92,7 @@ phases:
           reference: "gate-acceptance-log 2026-07-30 (ligne 3.5), PR hub #286"
   - id: handoff
     title: Passation outillée
+    note: "Decomposition to activate on wake: the 6 work packages listed in docs/apps/specifications.md § Work packages."
     exit_criteria:
       - id: handoff-done
         text: Une conversation devient décision, spécification et passation exportable, parcours e2e verts.
